@@ -76,4 +76,53 @@ describe('set-diff Node-RED node', () => {
             })
         })
     })
+
+    describe('"emitEmpty?" property', () => {
+
+        it('should not emit empty diffs when not configured to do so', (done) => {
+            const flow = [
+                { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false, wires: [['n2']] },
+                { id: 'n2', type: 'helper' }
+            ]
+
+            helper.load(diffNode, flow, () => {
+                var n2 = helper.getNode('n2')
+                var n1 = helper.getNode('n1')
+
+                n1.receive({ payload: [1, 2, 3] })
+
+                const timeoutId = setTimeout(done, 1000)
+                n2.on('input', (msg) => {
+                    clearTimeout(timeoutId)
+                    done(new Error('Empty values where emitted to output'))
+                })
+
+                n1.receive({ payload: [1, 2, 3] })
+            })
+        })
+
+        it('should emit empty diffs when configured to do so', (done) => {
+            const flow = [
+                { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: true, wires: [['n2']] },
+                { id: 'n2', type: 'helper' }
+            ]
+
+            helper.load(diffNode, flow, () => {
+                var n2 = helper.getNode('n2')
+                var n1 = helper.getNode('n1')
+
+                n1.receive({ payload: [1, 2, 3] })
+
+                n2.on('input', (msg) => {
+                    if (msg.diff.add.length == 0 && msg.diff.del.length == 0) {
+                        done()
+                    } else {
+                        done(new Error('Emitted diff is not empty'))
+                    }
+                })
+
+                n1.receive({ payload: [1, 2, 3] })
+            })
+        })
+    })
 })

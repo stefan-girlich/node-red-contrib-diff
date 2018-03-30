@@ -6,6 +6,9 @@ const diff = require('./lib/set-diff')
 module.exports = (RED) => {
     function detectChangesInValues(config) {
         RED.nodes.createNode(this, config);
+
+        const emitEmpty = !!config.emitEmpty
+
         var node = this;
 
         node.on('input', (msg) => {
@@ -17,6 +20,12 @@ module.exports = (RED) => {
             msg[CHANGES_PROPERTY] = changes
 
             context.set(PREV_SET_KEY, currSet)
+
+            const changesAreEmpty = changes.add.length == 0 && changes.del.length == 0
+            if (!emitEmpty && changesAreEmpty) {
+                return
+            }
+
             node.send(msg)
         });
     }
