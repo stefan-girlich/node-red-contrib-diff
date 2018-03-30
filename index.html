@@ -1,0 +1,39 @@
+<script type="text/javascript">
+    RED.nodes.registerType('set-diff', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.png",
+        label: () => {
+            return this.name || "set-diff";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="set-diff">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="set-diff">
+    <p>
+        A node which detects and filters changes between sets provided as message payloads.
+        The set represented by the message payload is compared to the last message payload 
+        previously sent to the node instance.
+    </p>
+
+    <p>
+        <ul>
+            <li>Sets of values of any type needs to be provided as an array. Any other data type 
+                will be ignored and result in an empty emission.</li>
+            <li>Changes in sets of values are depicted as <i>additions</i> and <i>deletions</i>. 
+            <b>TODO document data structure</b></li>
+        </ul>
+    </p>
+</script>
