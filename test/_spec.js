@@ -20,7 +20,7 @@ describe('set-diff node', function () {
     })
 
     it('should be loaded', (done) => {
-        const flow = [{ id: 'n1', type: 'set-diff', name: 'test name' }]
+        const flow = [{ id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false }]
         helper.load(diffNode, flow, function () {
             var node = helper.getNode('n1')
             assertEquals(node.name, 'test name', done)
@@ -29,8 +29,8 @@ describe('set-diff node', function () {
 
     it('should detect all new values as additions when no previous payload stored', (done) => {
         const flow = [
-            { id: 'n1', type: 'set-diff', name: 'test name', wires: [['n2']] },
-            { id: 'n2', type: 'helper' }
+            { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false, wires: [['n2']] },
+            { id: 'n2', type: 'helper', emitEmpty: false }
         ]
 
         helper.load(diffNode, flow, function () {
@@ -38,13 +38,12 @@ describe('set-diff node', function () {
             var n1 = helper.getNode('n1')
 
             n2.on('input', (msg) => {
-                const result = msg.diff
                 const expected = {
                     add: [1, 2, 3],
                     del: [],
                 }
 
-                assertEquals(result, expected, done)
+                assertEquals(msg.diff, expected, done)
             })
 
             n1.receive({ payload: [1, 2, 3] })
@@ -53,7 +52,7 @@ describe('set-diff node', function () {
 
     it('should detect all additions and deletions compared to a previous payload', (done) => {
         const flow = [
-            { id: 'n1', type: 'set-diff', name: 'test name', wires: [['n2']] },
+            { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false, wires: [['n2']] },
             { id: 'n2', type: 'helper' }
         ]
 
@@ -64,13 +63,12 @@ describe('set-diff node', function () {
             n1.receive({ payload: [1, 2, 3] })
 
             n2.on('input', (msg) => {
-                const result = msg.diff
                 const expected = {
                     add: [4, 5],
                     del: [1],
                 }
 
-                assertEquals(result, expected, done)
+                assertEquals(msg.diff, expected, done)
             })
 
             n1.receive({ payload: [4, 2, 3, 5] })
