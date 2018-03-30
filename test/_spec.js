@@ -23,9 +23,7 @@ describe('set-diff node', function () {
         const flow = [{ id: 'n1', type: 'set-diff', name: 'test name' }]
         helper.load(diffNode, flow, function () {
             var node = helper.getNode('n1')
-            assert.equal(node.name, 'test name')
-            node.should.have.property('name', 'test name')
-            done()
+            assertEquals(node.name, 'test name', done)
         })
     })
 
