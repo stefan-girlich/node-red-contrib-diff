@@ -91,7 +91,7 @@ describe('diff-set Node-RED node', () => {
 
                 n1.receive({ payload: [1, 2, 3] })
 
-                const timeoutId = setTimeout(done, 1000)
+                const timeoutId = setTimeout(done, 10)
                 n2.on('input', (msg) => {
                     clearTimeout(timeoutId)
                     done(new Error('Empty values where emitted to output'))
