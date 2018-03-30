@@ -38,8 +38,16 @@
         <ul>
             <li>Sets of values of any type needs to be provided as an array. Any other data type 
                 will be ignored and result in an empty emission.</li>
-            <li>Changes in sets of values are depicted as <i>additions</i> and <i>deletions</i>. 
-            <b>TODO document data structure</b></li>
+            <li>The given data is interpreted as <i>sets</i>, meaning that differences in order are ignored.</li>
+            <li>Changes in sets of values are depicted as <i>additions</i> and <i>deletions</i>:<br/>
+                <code>
+                console.log(msg.diff)
+                // {
+                    add: [1, 2],
+                    del: [3, 4]
+                }
+                </code>
+            </li>
         </ul>
     </p>
 </script>
