@@ -1,7 +1,7 @@
 {
-  "name": "node-red-contrib-array-diff",
+  "name": "node-red-contrib-set-diff",
   "version": "1.0.0",
-  "description": "Node-RED node for detecting changes in a set of values",
+  "description": "Node-RED node for detecting changes between two sets of values",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

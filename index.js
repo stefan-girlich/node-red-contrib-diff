@@ -1,5 +1,5 @@
 module.exports = (RED) => {
-    function arrayDiff(config) {
+    function setDiff(config) {
         RED.nodes.createNode(this, config);
         var node = this;
         node.on('input', function (msg) {
@@ -7,5 +7,5 @@ module.exports = (RED) => {
             node.send(msg);
         });
     }
-    RED.nodes.registerType("array-diff", arrayDiff);
+    RED.nodes.registerType("set-diff", setDiff);
 }
