@@ -13,7 +13,7 @@ const assertEquals = (actual, expected, done) => {
     done()
 }
 
-describe('set-diff Node-RED node', () => {
+describe('diff-set Node-RED node', () => {
 
     afterEach(() => {
         helper.unload()
@@ -21,7 +21,7 @@ describe('set-diff Node-RED node', () => {
 
     describe('basic functionality', () => {
         it('should be loaded', (done) => {
-            const flow = [{ id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false }]
+            const flow = [{ id: 'n1', type: 'diff-set', name: 'test name', emitEmpty: false }]
             helper.load(diffNode, flow, () => {
                 var node = helper.getNode('n1')
                 assertEquals(node.name, 'test name', done)
@@ -30,7 +30,7 @@ describe('set-diff Node-RED node', () => {
 
         it('should detect all new values as additions when no previous payload stored', (done) => {
             const flow = [
-                { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false, wires: [['n2']] },
+                { id: 'n1', type: 'diff-set', name: 'test name', emitEmpty: false, wires: [['n2']] },
                 { id: 'n2', type: 'helper', emitEmpty: false }
             ]
 
@@ -53,7 +53,7 @@ describe('set-diff Node-RED node', () => {
 
         it('should detect all additions and deletions compared to a previous payload', (done) => {
             const flow = [
-                { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false, wires: [['n2']] },
+                { id: 'n1', type: 'diff-set', name: 'test name', emitEmpty: false, wires: [['n2']] },
                 { id: 'n2', type: 'helper' }
             ]
 
@@ -81,7 +81,7 @@ describe('set-diff Node-RED node', () => {
 
         it('should not emit empty diffs when not configured to do so', (done) => {
             const flow = [
-                { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: false, wires: [['n2']] },
+                { id: 'n1', type: 'diff-set', name: 'test name', emitEmpty: false, wires: [['n2']] },
                 { id: 'n2', type: 'helper' }
             ]
 
@@ -103,7 +103,7 @@ describe('set-diff Node-RED node', () => {
 
         it('should emit empty diffs when configured to do so', (done) => {
             const flow = [
-                { id: 'n1', type: 'set-diff', name: 'test name', emitEmpty: true, wires: [['n2']] },
+                { id: 'n1', type: 'diff-set', name: 'test name', emitEmpty: true, wires: [['n2']] },
                 { id: 'n2', type: 'helper' }
             ]
 

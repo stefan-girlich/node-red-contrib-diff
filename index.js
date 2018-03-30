@@ -1,7 +1,7 @@
-const PREV_SET_KEY = 'node-red-contrib-set-diff_previous_set_of_values'
+const PREV_SET_KEY = 'node-red-contrib-diff-set_previous_set_of_values'
 const CHANGES_PROPERTY = 'diff'
 
-const diff = require('./lib/set-diff')
+const diff = require('./lib/diff-set')
 
 module.exports = (RED) => {
     function detectChangesInValues(config) {
@@ -29,5 +29,5 @@ module.exports = (RED) => {
             node.send(msg)
         });
     }
-    RED.nodes.registerType('set-diff', detectChangesInValues)
+    RED.nodes.registerType('diff-set', detectChangesInValues)
 }

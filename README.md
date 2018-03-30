@@ -1,4 +1,4 @@
-# node-red-contrib-set-diff
+# node-red-contrib-diff-set
 
 This project contains a <a href="https://nodered.org">Node-RED</a> node which detects changes in an input set of values and emits them as output.
 

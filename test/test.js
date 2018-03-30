@@ -1,14 +1,14 @@
 'use strict'
 
 const assert = require('assert')
-const diff = require('../lib/set-diff')
+const diff = require('../lib/diff-set')
 
 const EMPTY_RESULT = {
     add: [],
     del: [],
 }
 
-describe('set-diff', () => {
+describe('diff-set', () => {
 
     describe('missing and empty values ', () => {
 

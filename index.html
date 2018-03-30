@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('set-diff', {
+    RED.nodes.registerType('diff-set', {
         category: 'function',
         color: '#a6bbcf',
         defaults: {
@@ -10,12 +10,12 @@
         outputs: 1,
         icon: 'function.png',
         label: () => {
-            return this.name || 'set-diff'
+            return this.name || 'diff-set'
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="set-diff">
+<script type="text/x-red" data-template-name="diff-set">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -27,7 +27,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="set-diff">
+<script type="text/x-red" data-help-name="diff-set">
     <p>
         A node which detects and filters changes between sets provided as message payloads.
         The set represented by the message payload is compared to the last message payload 
