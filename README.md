@@ -10,5 +10,9 @@ _TODO_
 
 _TODO_
 
+
+## To do
+- Add config option for (not) emitting values when no actual change detected
+
 ## License
 MIT License
